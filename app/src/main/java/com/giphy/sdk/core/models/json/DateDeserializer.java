@@ -25,11 +25,6 @@ public class DateDeserializer implements JsonDeserializer<Date> {
     private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
     private final DateFormat dateFormatStories = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
 
-    public DateDeserializer(){
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        dateFormatStories.setTimeZone(TimeZone.getTimeZone("UTC"));
-    }
-
     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
         Date date = null;
