@@ -10,14 +10,28 @@
 package com.giphy.sdk.core;
 
 import com.giphy.sdk.core.models.Media;
+import com.giphy.sdk.core.models.json.BooleanDeserializer;
+import com.giphy.sdk.core.models.json.DateSerializer;
+import com.giphy.sdk.core.models.json.IntDeserializer;
+import com.giphy.sdk.core.models.json.MainAdapterFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import junit.framework.Assert;
 
+import java.util.Date;
 import java.util.List;
 
 public class Utils {
     public static long SMALL_DELAY = 2000;
     public static long MEDIUM_DELAY = 3000;
+
+    public static final Gson GSON_INSTANCE_TEST = new GsonBuilder().registerTypeHierarchyAdapter(Date.class, new TestDateDeserializer())
+            .registerTypeHierarchyAdapter(Date.class, new DateSerializer())
+            .registerTypeHierarchyAdapter(boolean.class, new BooleanDeserializer())
+            .registerTypeHierarchyAdapter(int.class, new IntDeserializer())
+            .registerTypeAdapterFactory(new MainAdapterFactory())
+            .create();
 
     public static void checkOffsetWorks(List<Media> result1, List<Media> result2) {
         checkOffsetWorks(result1, result2, 20);

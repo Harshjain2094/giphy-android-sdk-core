@@ -14,20 +14,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.giphy.sdk.core.models.Media;
-import com.giphy.sdk.core.models.json.BooleanDeserializer;
-import com.giphy.sdk.core.models.json.DateDeserializer;
-import com.giphy.sdk.core.models.json.IntDeserializer;
-import com.giphy.sdk.core.models.json.MainAdapterFactory;
 import com.giphy.sdk.core.models.enums.MediaType;
 import com.giphy.sdk.core.network.api.CompletionHandler;
 import com.giphy.sdk.core.network.api.GPHApiClient;
-import com.giphy.sdk.core.network.engine.DefaultNetworkSession;
 import com.giphy.sdk.core.network.engine.NetworkSession;
 import com.giphy.sdk.core.network.response.GenericResponse;
 import com.giphy.sdk.core.network.response.ListMediaResponse;
 import com.giphy.sdk.core.threading.ApiTask;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import junit.framework.Assert;
 
@@ -35,7 +28,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
@@ -146,7 +138,7 @@ public class OkHttpIntegrationTest {
                     // Deserialize HTTP response to concrete type.
 
                     final ResponseBody body = response.body();
-                    return DefaultNetworkSession.GSON_INSTANCE.fromJson(body.string(), responseClass);
+                    return Utils.GSON_INSTANCE_TEST.fromJson(body.string(), responseClass);
                 }
             });
         }

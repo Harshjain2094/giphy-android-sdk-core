@@ -16,7 +16,6 @@ import com.giphy.sdk.core.network.api.CompletionHandler;
 import com.giphy.sdk.core.network.api.GPHApi;
 import com.giphy.sdk.core.network.api.GPHApiClient;
 import com.giphy.sdk.core.network.engine.ApiException;
-import com.giphy.sdk.core.network.engine.DefaultNetworkSession;
 import com.giphy.sdk.core.network.response.MediaResponse;
 
 import junit.framework.Assert;
@@ -163,9 +162,9 @@ public class GifByIdTest {
                 bottleData.setTags(tags);
                 result.getData().setBottleData(bottleData);
 
-                final String str1 = DefaultNetworkSession.GSON_INSTANCE.toJson(result.getData());
-                final Media obj1 = DefaultNetworkSession.GSON_INSTANCE.fromJson(str1, Media.class);
-                final String str2 = DefaultNetworkSession.GSON_INSTANCE.toJson(obj1);
+                final String str1 = Utils.GSON_INSTANCE_TEST.toJson(result.getData());
+                final Media obj1 = Utils.GSON_INSTANCE_TEST.fromJson(str1, Media.class);
+                final String str2 = Utils.GSON_INSTANCE_TEST.toJson(obj1);
                 Assert.assertEquals(str1, str2);
                 Assert.assertNotNull(obj1.getBottleData());
                 Assert.assertEquals(obj1.getBottleData().getTid(), bottleData.getTid());

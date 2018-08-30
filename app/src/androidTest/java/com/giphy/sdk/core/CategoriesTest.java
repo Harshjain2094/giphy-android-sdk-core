@@ -12,13 +12,9 @@ package com.giphy.sdk.core;
 import android.os.Parcel;
 
 import com.giphy.sdk.core.models.Category;
-import com.giphy.sdk.core.models.Media;
-import com.giphy.sdk.core.models.enums.MediaType;
 import com.giphy.sdk.core.network.api.CompletionHandler;
 import com.giphy.sdk.core.network.api.GPHApiClient;
-import com.giphy.sdk.core.network.engine.DefaultNetworkSession;
 import com.giphy.sdk.core.network.response.ListCategoryResponse;
-import com.giphy.sdk.core.network.response.ListMediaResponse;
 import com.google.gson.Gson;
 
 import junit.framework.Assert;
@@ -267,11 +263,10 @@ public class CategoriesTest {
                 Assert.assertNotNull(result);
                 Assert.assertTrue(result.getData().size() == 15);
 
-                Gson gson = new Gson();
                 for (Category category : result.getData()) {
-                    final String str1 = DefaultNetworkSession.GSON_INSTANCE.toJson(category);
-                    final Category obj1 = DefaultNetworkSession.GSON_INSTANCE.fromJson(str1, Category.class);
-                    final String str2 = DefaultNetworkSession.GSON_INSTANCE.toJson(obj1);
+                    final String str1 = Utils.GSON_INSTANCE_TEST.toJson(category);
+                    final Category obj1 = Utils.GSON_INSTANCE_TEST.fromJson(str1, Category.class);
+                    final String str2 = Utils.GSON_INSTANCE_TEST.toJson(obj1);
                     Assert.assertEquals(str1, str2);
                 }
 
