@@ -37,6 +37,7 @@ public interface GPHApi {
      * @param offset (optional) results offset, defaults to 0.
      * @param rating (optional) limit results to those rated (y,g, pg, pg-13 or r).
      * @param lang  (optional) specify default country for regional content; format is 2-letter ISO 639-1 country code.
+     * @param pingbackId  (optional) specify pingback user id
      * @param completionHandler
      * @return
      */
@@ -44,6 +45,7 @@ public interface GPHApi {
     public Future search(@NonNull String searchQuery, @Nullable MediaType type, @Nullable Integer limit,
                          @Nullable Integer offset, @Nullable RatingType rating,
                          @Nullable LangType lang,
+                         @Nullable String pingbackId,
                          @NonNull final CompletionHandler<ListMediaResponse> completionHandler);
 
     /**

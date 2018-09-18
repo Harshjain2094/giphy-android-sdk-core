@@ -81,7 +81,7 @@ public class OkHttpIntegrationTest {
     public void testSearch() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("hack", MediaType.gif, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("hack", MediaType.gif, null, null, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);

@@ -56,6 +56,7 @@ public class GPHApiClient implements GPHApi {
     public Future search(@NonNull String searchQuery, @Nullable MediaType type, @Nullable Integer limit,
                          @Nullable Integer offset, @Nullable RatingType rating,
                          @Nullable LangType lang,
+                         @Nullable String pingbackId,
                          @NonNull final CompletionHandler<ListMediaResponse> completionHandler) {
 
         final Map<String, String> params = new HashMap<>();
@@ -72,6 +73,9 @@ public class GPHApiClient implements GPHApi {
         }
         if (lang != null) {
             params.put("lang", lang.toString());
+        }
+        if (pingbackId != null) {
+            params.put("pingback_id", pingbackId);
         }
 
         return networkSessionImpl.queryStringConnection(Constants.SERVER_URL,

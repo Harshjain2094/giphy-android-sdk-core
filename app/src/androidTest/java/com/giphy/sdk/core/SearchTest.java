@@ -50,7 +50,7 @@ public class SearchTest {
     public void testBase() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("hack", MediaType.gif, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("hack", MediaType.gif, null, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -72,7 +72,7 @@ public class SearchTest {
     public void testNoResults() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("jjhjhhjhhhjjhhh", MediaType.gif, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("jjhjhhjhhhjjhhh", MediaType.gif, null, null, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -93,7 +93,7 @@ public class SearchTest {
     public void testLimit() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("cats", MediaType.gif, 13, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cats", MediaType.gif, 13, null, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -114,7 +114,7 @@ public class SearchTest {
     public void testRating() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("cats", MediaType.gif, 20, null, RatingType.pg, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cats", MediaType.gif, 20, null, RatingType.pg, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -135,7 +135,7 @@ public class SearchTest {
     public void testRatingY() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("cars", MediaType.gif, 20, null, RatingType.y, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cars", MediaType.gif, 20, null, RatingType.y, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -158,7 +158,7 @@ public class SearchTest {
     public void testRatingUnrated() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("cars", MediaType.gif, 20, null, RatingType.unrated, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cars", MediaType.gif, 20, null, RatingType.unrated, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -179,7 +179,7 @@ public class SearchTest {
     public void testRatingNsfw() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("cars", MediaType.gif, 20, null, RatingType.nsfw, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cars", MediaType.gif, 20, null, RatingType.nsfw, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -200,7 +200,7 @@ public class SearchTest {
     public void testLang() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("cars", MediaType.gif, 20, null, null, LangType.chineseTraditional, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cars", MediaType.gif, 20, null, null, LangType.chineseTraditional, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -222,14 +222,14 @@ public class SearchTest {
     public void testOffset() throws Exception {
         final CountDownLatch lock = new CountDownLatch(2);
 
-        imp.search("cats", MediaType.gif, 7, 0, RatingType.pg, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("cats", MediaType.gif, 7, 0, RatingType.pg, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(final ListMediaResponse result1, Throwable e) {
                 Assert.assertNull(e);
                 Assert.assertNotNull(result1);
                 Assert.assertTrue(result1.getData().size() == 7);
 
-                imp.search("cats", MediaType.gif, 6, 4, RatingType.pg, null, new CompletionHandler<ListMediaResponse>() {
+                imp.search("cats", MediaType.gif, 6, 4, RatingType.pg, null, "test", new CompletionHandler<ListMediaResponse>() {
                     @Override
                     public void onComplete(ListMediaResponse result2, Throwable e) {
                         Assert.assertNull(e);
@@ -256,7 +256,7 @@ public class SearchTest {
     public void testPagination() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("hack", MediaType.gif, 13, 12, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("hack", MediaType.gif, 13, 12, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -282,7 +282,7 @@ public class SearchTest {
     public void testMeta() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("test", MediaType.gif, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("test", MediaType.gif, null, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -309,7 +309,7 @@ public class SearchTest {
     public void testCancelation() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        final Future task = imp.search("hack", MediaType.gif, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        final Future task = imp.search("hack", MediaType.gif, null, null, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 // Ignore this test on travis
@@ -336,7 +336,7 @@ public class SearchTest {
     public void testCancelationWithDelay() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        final Future task = imp.search("hack", MediaType.gif, 2, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        final Future task = imp.search("hack", MediaType.gif, 2, null, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 // If we get here, the test will fail, since it wasn't properly canceled
@@ -348,7 +348,7 @@ public class SearchTest {
 
         // Cancel after a small period of time. Enough for the network request to start, but less
         // than it takes to complete
-        lock.await(20, TimeUnit.MILLISECONDS);
+        lock.await(15, TimeUnit.MILLISECONDS);
         task.cancel(true);
 
         lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
@@ -363,7 +363,7 @@ public class SearchTest {
     public void testWidthHeight() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("hack", MediaType.gif, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("hack", MediaType.gif, null, null, null, null, "test", new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -391,7 +391,7 @@ public class SearchTest {
     public void testParcelable() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("hack", MediaType.gif, 7, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("hack", MediaType.gif, 7, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
@@ -423,7 +423,7 @@ public class SearchTest {
     public void testJson() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
 
-        imp.search("hack", MediaType.gif, 7, null, null, null, new CompletionHandler<ListMediaResponse>() {
+        imp.search("hack", MediaType.gif, 7, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
                 Assert.assertNull(e);
