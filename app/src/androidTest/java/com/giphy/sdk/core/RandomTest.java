@@ -73,27 +73,7 @@ public class RandomTest {
         });
         lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
     }
-
-    /**
-     * Test no results tag
-     * @throws Exception
-     */
-    @Test
-    public void testNoResult() throws Exception {
-        final CountDownLatch lock = new CountDownLatch(1);
-
-        imp.random("cats_ttttt", MediaType.gif, RatingType.pg, new CompletionHandler<MediaResponse>() {
-            @Override
-            public void onComplete(MediaResponse result, Throwable e) {
-                Assert.assertNull(result);
-                Assert.assertNotNull(e);
-
-                lock.countDown();
-            }
-        });
-        lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
-    }
-
+    
     /**
      * Test gif fields
      * @throws Exception
