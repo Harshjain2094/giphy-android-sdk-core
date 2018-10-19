@@ -19,6 +19,7 @@ import com.giphy.sdk.core.models.json.DateDeserializer;
 import com.giphy.sdk.core.models.json.DateSerializer;
 import com.giphy.sdk.core.models.json.IntDeserializer;
 import com.giphy.sdk.core.models.json.MainAdapterFactory;
+import com.giphy.sdk.core.network.api.GPHApiClient;
 import com.giphy.sdk.core.network.response.ErrorResponse;
 import com.giphy.sdk.core.network.response.GenericResponse;
 import com.giphy.sdk.core.threading.ApiTask;
@@ -62,10 +63,19 @@ public class DefaultNetworkSession implements NetworkSession {
         this.completionExecutor = completionExecutor;
     }
 
+
     @Override
     public <T extends GenericResponse> ApiTask<T> queryStringConnection(@NonNull final Uri serverUrl, @NonNull final String path,
                                                                         @NonNull final String method, @NonNull final Class<T> responseClass, @Nullable final Map<String, String> queryStrings,
                                                                         @Nullable final Map<String, String> headers) {
+        return postStringConnection(serverUrl, path, method, responseClass, queryStrings, headers, null);
+    }
+
+    @Override
+    public <T extends GenericResponse> ApiTask<T> postStringConnection(@NonNull final Uri serverUrl, @NonNull final String path,
+                                                                        @NonNull final String method, @NonNull final Class<T> responseClass, @Nullable final Map<String, String> queryStrings,
+                                                                        @Nullable final Map<String, String> headers,
+                                                                        @Nullable final Object requestBody) {
         return new ApiTask<>(new Callable<T>() {
             @Override
             public T call() throws Exception {
@@ -90,11 +100,21 @@ public class DefaultNetworkSession implements NetworkSession {
                         }
                     }
 
-                    connection.connect();
+
+                    if (method.equals(GPHApiClient.HTTP_POST)) {
+                        connection.setDoOutput(true);
+                        connection.connect();
+                        if (requestBody != null) {
+                            byte[] postDataBytes = GSON_INSTANCE.toJson(requestBody).getBytes("UTF-8");
+                            connection.getOutputStream().write(postDataBytes);
+                        }
+                    } else {
+                        connection.connect();
+                    }
 
                     return readJsonResponse(url, connection, responseClass);
                 } catch (Throwable t) {
-                    Log.e(NetworkSession.class.getName(), "Unable to perform network request", t);
+                    Log.e(NetworkSession.class.getName(), "Unable to perform network request for url=" + url, t);
                     throw t;
                 } finally {
                     if (connection != null) {
