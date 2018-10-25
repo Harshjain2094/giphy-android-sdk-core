@@ -35,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -48,6 +49,7 @@ public class OkHttpIntegrationTest {
 
     /**
      * Test if trending without params returns 25 gifs and not exception.
+     *
      * @throws Exception
      */
     @Test
@@ -123,6 +125,50 @@ public class OkHttpIntegrationTest {
                     final URL url = new URL(uriBuilder.build().toString());
 
                     final Request.Builder requestBuilder = new Request.Builder()
+                            .url(url);
+
+                    if (headers != null) {
+                        for (Map.Entry<String, String> header : headers.entrySet()) {
+                            requestBuilder.addHeader(header.getKey(), header.getValue());
+                        }
+                    }
+
+                    final Request request = requestBuilder.build();
+
+                    final OkHttpClient client = new OkHttpClient();
+                    final Response response = client.newCall(request).execute();
+                    // Deserialize HTTP response to concrete type.
+
+                    final ResponseBody body = response.body();
+                    return Utils.GSON_INSTANCE_TEST.fromJson(body.string(), responseClass);
+                }
+            });
+        }
+
+        @Override
+        public <T extends GenericResponse> ApiTask<T> postStringConnection(@NonNull final Uri serverUrl,
+                                                                           @NonNull final String path,
+                                                                           @NonNull final String method,
+                                                                           @NonNull final Class<T> responseClass,
+                                                                           @Nullable final Map<String, String> queryStrings,
+                                                                           @Nullable final Map<String, String> headers,
+                                                                           @Nullable final Object requestBody) {
+            return new ApiTask<>(new Callable<T>() {
+                @Override
+                public T call() throws Exception {
+                    final Uri.Builder uriBuilder = serverUrl.buildUpon().appendEncodedPath(path);
+
+                    if (queryStrings != null) {
+                        for (Map.Entry<String, String> query : queryStrings.entrySet()) {
+                            uriBuilder.appendQueryParameter(query.getKey(), query.getValue());
+                        }
+                    }
+
+                    final URL url = new URL(uriBuilder.build().toString());
+
+                    RequestBody requestBody1 = RequestBody.create(okhttp3.MediaType.parse("application/json"), Utils.GSON_INSTANCE_TEST.toJson(requestBody));
+                    final Request.Builder requestBuilder = new Request.Builder()
+                            .method(method, requestBody1)
                             .url(url);
 
                     if (headers != null) {

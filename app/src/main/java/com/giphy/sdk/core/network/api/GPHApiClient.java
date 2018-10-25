@@ -36,6 +36,7 @@ import java.util.concurrent.Future;
  */
 public class GPHApiClient implements GPHApi {
     public static final String HTTP_GET = "GET";
+    public static final String HTTP_POST = "POST";
     public static final String HTTP_DELETE = "DELETE";
     public static final String API_KEY = "api_key";
 

@@ -13,6 +13,7 @@ import android.net.Uri;
 
 public class Constants {
     public static final Uri SERVER_URL = Uri.parse("https://api.giphy.com");
+    public static final Uri MOBILE_API_URL = Uri.parse("https://x.giphy.com");
 
     public static final String API_KEY = "api_key";
 
