@@ -9,8 +9,10 @@
 
 package com.giphy.sdk.core.models;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 
 import com.giphy.sdk.core.models.enums.MediaType;
@@ -75,6 +77,9 @@ public class Media implements Parcelable {
     @SerializedName("bottle_data")
     private BottleData bottleData;
 
+    @Nullable
+    private transient Bundle userDictionary;
+
     public Media() {}
 
     public Media(Parcel in) {
@@ -118,6 +123,8 @@ public class Media implements Parcelable {
         title = in.readString();
 
         bottleData = in.readParcelable(BottleData.class.getClassLoader());
+
+        userDictionary = in.readBundle();
     }
 
     /**
@@ -363,6 +370,20 @@ public class Media implements Parcelable {
     }
 
     /**
+     * @return userDictionary
+     */
+    @Nullable
+    public Bundle getUserDictionary() {
+        return userDictionary;
+    }
+
+    /**
+     * Set userDictionary
+     */
+    public void setUserDictionary(@Nullable Bundle bundle) {
+        userDictionary = bundle;
+    }
+    /**
      * Passed down the media id to the @images field and call postProcess function on @images field
      */
     public void postProcess() {
@@ -425,5 +446,7 @@ public class Media implements Parcelable {
         parcel.writeString(title);
 
         parcel.writeParcelable(bottleData, i);
+
+        parcel.writeBundle(userDictionary);
     }
 }

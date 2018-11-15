@@ -9,6 +9,7 @@
 
 package com.giphy.sdk.core;
 
+import android.os.Bundle;
 import android.os.Parcel;
 
 import com.giphy.sdk.core.models.Media;
@@ -398,6 +399,12 @@ public class SearchTest {
                 Assert.assertNotNull(result);
                 Assert.assertTrue(result.getData().size() == 7);
 
+                for (Media media : result.getData()) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("test", "test2");
+                    media.setUserDictionary(bundle);
+                }
+
                 Gson gson = new Gson();
                 for (Media media : result.getData()) {
                     Parcel parcel = Parcel.obtain();
@@ -406,6 +413,8 @@ public class SearchTest {
                     Media parcelMedia = Media.CREATOR.createFromParcel(parcel);
                     // Compare the initial object with the one obtained from parcel
                     Assert.assertEquals(gson.toJson(parcelMedia), gson.toJson(media));
+                    Assert.assertNotNull(media.getUserDictionary());
+                    Assert.assertEquals(media.getUserDictionary().getString("test"), "test2");
                 }
 
                 lock.countDown();
