@@ -7,13 +7,13 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.giphy.sdk.core.network.api;
+package com.giphy.sdk.core.network.api
 
 /**
  * Completion handler callback. It's the main interface for getting the results or errors from
  * the network requests
  * @param <T>
- */
-public interface CompletionHandler <T> {
-    public void onComplete(T result, Throwable e);
+</T> */
+interface CompletionHandler<in T> {
+    fun onComplete(result: T?, e: Throwable?)
 }
