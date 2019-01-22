@@ -31,8 +31,8 @@ import java.util.concurrent.ExecutorService
  */
 class DefaultNetworkSession : NetworkSession {
 
-    private var networkRequestExecutor: ExecutorService? = null
-    private var completionExecutor: Executor? = null
+    private var networkRequestExecutor: ExecutorService
+    private var completionExecutor: Executor
 
     constructor() {
         networkRequestExecutor = ApiTask.getNetworkRequestExecutor()
@@ -55,7 +55,7 @@ class DefaultNetworkSession : NetworkSession {
                                                             method: String, responseClass: Class<T>, queryStrings: Map<String, String>?,
                                                             headers: Map<String, String>?,
                                                             requestBody: Any?): ApiTask<T> {
-        return ApiTask(Callable {
+        return ApiTask<T>(Callable {
             var connection: HttpURLConnection? = null
             var url: URL? = null
             try {
@@ -106,10 +106,9 @@ class DefaultNetworkSession : NetworkSession {
         val succeeded = (responseCode == HttpURLConnection.HTTP_OK
                 || responseCode == HttpURLConnection.HTTP_CREATED
                 || responseCode == HttpURLConnection.HTTP_ACCEPTED)
-        var contents = ""
+        val contents: String
         if (succeeded) {
              contents = connection.inputStream.bufferedReader().readText()
-
         } else {
             contents = connection.errorStream.bufferedReader().readText()
         }
