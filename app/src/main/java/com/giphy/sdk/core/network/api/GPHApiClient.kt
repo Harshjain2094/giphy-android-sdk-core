@@ -99,7 +99,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
             params["rating"] = it.toString()
         }
 
-        val completionHandlerWrapper = object: CompletionHandler<RandomGifResponse> {
+        val completionHandlerWrapper = object : CompletionHandler<RandomGifResponse> {
             override fun onComplete(result: RandomGifResponse?, e: Throwable?) {
                 if (result != null) {
                     completionHandler.onComplete(result.toGifResponse(), null)
@@ -119,7 +119,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                                    completionHandler: CompletionHandler<ListCategoryResponse>): Future<*> {
         val params = HashMap<String, String>()
         params[API_KEY] = apiKey
-        limit?.let{
+        limit?.let {
             params["limit"] = it.toString()
         }
         offset?.let {
@@ -150,14 +150,14 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
         }
         val completionHandlerWrapper = object : CompletionHandler<ListCategoryResponse> {
             override fun onComplete(result: ListCategoryResponse?, e: Throwable?) {
-                return if (result != null) {
-                    if (result.data != null) {
-                        for (subCategory in result.data) {
+                result?.also {
+                    result.data?.let {
+                        for (subCategory in it) {
                             subCategory.encodedPath = categoryEncodedName + "/" + subCategory.nameEncoded
                         }
                     }
                     completionHandler.onComplete(result, null)
-                } else {
+                } ?: run {
                     completionHandler.onComplete(null, e)
                 }
             }

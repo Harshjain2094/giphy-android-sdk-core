@@ -7,7 +7,6 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.giphy.sdk.core.network.response;
+package com.giphy.sdk.core.network.response
 
-public interface GenericResponse {
-}
+interface GenericResponse
