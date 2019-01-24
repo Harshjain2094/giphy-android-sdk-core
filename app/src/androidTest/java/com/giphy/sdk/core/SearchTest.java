@@ -9,9 +9,6 @@
 
 package com.giphy.sdk.core;
 
-import android.os.Bundle;
-import android.os.Parcel;
-
 import com.giphy.sdk.core.models.Media;
 import com.giphy.sdk.core.models.enums.LangType;
 import com.giphy.sdk.core.models.enums.MediaType;
@@ -19,7 +16,6 @@ import com.giphy.sdk.core.models.enums.RatingType;
 import com.giphy.sdk.core.network.api.CompletionHandler;
 import com.giphy.sdk.core.network.api.GPHApiClient;
 import com.giphy.sdk.core.network.response.ListMediaResponse;
-import com.google.gson.Gson;
 
 import junit.framework.Assert;
 
@@ -375,46 +371,6 @@ public class SearchTest {
                     Assert.assertTrue(media.getImages().getOriginal().getHeight() > 0);
                     Assert.assertTrue(media.getImages().getOriginal().getWidth() > 0);
                     Assert.assertTrue(media.getImages().getOriginal().getFrames() > 0);
-                }
-
-                lock.countDown();
-            }
-        });
-        lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
-    }
-
-    /**
-     * Test if parcelable is implemeted correctly for the models
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testParcelable() throws Exception {
-        final CountDownLatch lock = new CountDownLatch(1);
-
-        imp.search("hack", MediaType.gif, 7, null, null, null, null, new CompletionHandler<ListMediaResponse>() {
-            @Override
-            public void onComplete(ListMediaResponse result, Throwable e) {
-                Assert.assertNull(e);
-                Assert.assertNotNull(result);
-                Assert.assertTrue(result.getData().size() == 7);
-
-                for (Media media : result.getData()) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("test", "test2");
-                    media.setUserDictionary(bundle);
-                }
-
-                Gson gson = new Gson();
-                for (Media media : result.getData()) {
-                    Parcel parcel = Parcel.obtain();
-                    media.writeToParcel(parcel, 0);
-                    parcel.setDataPosition(0);
-                    Media parcelMedia = Media.Companion.getCREATOR().createFromParcel(parcel);
-                    // Compare the initial object with the one obtained from parcel
-                    Assert.assertEquals(gson.toJson(parcelMedia), gson.toJson(media));
-                    Assert.assertNotNull(media.getUserDictionary());
-                    Assert.assertEquals(media.getUserDictionary().getString("test"), "test2");
                 }
 
                 lock.countDown();
