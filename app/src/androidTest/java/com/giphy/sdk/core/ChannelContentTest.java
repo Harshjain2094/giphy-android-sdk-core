@@ -264,7 +264,7 @@ public class ChannelContentTest {
                     Parcel parcel = Parcel.obtain();
                     media.writeToParcel(parcel, 0);
                     parcel.setDataPosition(0);
-                    Media parcelMedia = Media.CREATOR.createFromParcel(parcel);
+                    Media parcelMedia = Media.Companion.getCREATOR().createFromParcel(parcel);
                     // Compare the initial object with the one obtained from parcel
                     Assert.assertEquals(gson.toJson(parcelMedia), gson.toJson(media));
                 }

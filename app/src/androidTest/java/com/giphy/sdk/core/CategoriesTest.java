@@ -236,7 +236,7 @@ public class CategoriesTest {
                     Parcel parcel = Parcel.obtain();
                     category.writeToParcel(parcel, 0);
                     parcel.setDataPosition(0);
-                    Category parcelCategory = Category.CREATOR.createFromParcel(parcel);
+                    Category parcelCategory = Category.Companion.getCREATOR().createFromParcel(parcel);
                     // Compare the initial object with the one obtained from parcel
                     Assert.assertEquals(gson.toJson(parcelCategory), gson.toJson(category));
                 }

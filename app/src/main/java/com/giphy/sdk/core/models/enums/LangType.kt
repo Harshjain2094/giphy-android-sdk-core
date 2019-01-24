@@ -7,11 +7,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.giphy.sdk.core.models.enums;
+package com.giphy.sdk.core.models.enums
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
-public enum LangType {
+enum class LangType private constructor(private val lang: String) {
     @SerializedName("en")
     english("en"),
 
@@ -108,13 +108,7 @@ public enum LangType {
     @SerializedName("uk")
     ukrainian("uk");
 
-    private final String lang;
-
-    private LangType(String lang) {
-        this.lang = lang;
-    }
-
-    public String toString() {
-        return this.lang;
+    override fun toString(): String {
+        return this.lang
     }
 }

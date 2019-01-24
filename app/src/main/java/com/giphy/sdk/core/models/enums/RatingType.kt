@@ -7,11 +7,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.giphy.sdk.core.models.enums;
+package com.giphy.sdk.core.models.enums
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
 
-public enum RatingType {
+enum class RatingType private constructor(private val rating: String) {
     r("r"),
     y("y"),
     g("g"),
@@ -21,13 +21,7 @@ public enum RatingType {
     unrated("unrated"),
     nsfw("nsfw");
 
-    private final String rating;
-
-    private RatingType(String rating) {
-        this.rating = rating;
-    }
-
-    public String toString() {
-        return this.rating;
+    override fun toString(): String {
+        return this.rating
     }
 }

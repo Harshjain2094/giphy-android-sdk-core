@@ -214,7 +214,7 @@ public class StickerPacksTest {
                     Parcel parcel = Parcel.obtain();
                     stickerPack.writeToParcel(parcel, 0);
                     parcel.setDataPosition(0);
-                    StickerPack parcelStickerPack = StickerPack.CREATOR.createFromParcel(parcel);
+                    StickerPack parcelStickerPack = StickerPack.Companion.getCREATOR().createFromParcel(parcel);
 
                     // Compare the initial object with the one obtained from parcel
                     String expected = gson.toJson(parcelStickerPack);

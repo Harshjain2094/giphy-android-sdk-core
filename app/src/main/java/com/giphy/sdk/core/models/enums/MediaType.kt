@@ -7,9 +7,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.giphy.sdk.core.models.enums;
+package com.giphy.sdk.core.models.enums
 
-public enum MediaType {
+enum class MediaType {
     gif,
     sticker
 }

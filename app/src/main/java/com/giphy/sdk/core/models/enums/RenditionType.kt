@@ -7,9 +7,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package com.giphy.sdk.core.models.enums;
+package com.giphy.sdk.core.models.enums
 
-public enum  RenditionType {
+enum class RenditionType {
     // Original file size and file dimensions. Good for desktop use.
     original,
 
@@ -66,5 +66,5 @@ public enum  RenditionType {
     downsizedLarge,
 
     /// Static preview image for downsized.
-    downsizedStill,
+    downsizedStill
 }

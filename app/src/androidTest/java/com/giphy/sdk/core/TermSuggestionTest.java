@@ -82,7 +82,7 @@ public class TermSuggestionTest {
                     Parcel parcel = Parcel.obtain();
                     termSuggestion.writeToParcel(parcel, 0);
                     parcel.setDataPosition(0);
-                    TermSuggestion parcelTermSuggestion = TermSuggestion.CREATOR.createFromParcel(parcel);
+                    TermSuggestion parcelTermSuggestion = TermSuggestion.Companion.getCREATOR().createFromParcel(parcel);
                     // Compare the initial object with the one obtained from parcel
                     Assert.assertEquals(gson.toJson(parcelTermSuggestion), gson.toJson(termSuggestion));
                 }
