@@ -9,15 +9,12 @@
 
 package com.giphy.sdk.core;
 
-import android.os.Parcel;
-
 import com.giphy.sdk.core.models.Media;
 import com.giphy.sdk.core.models.StickerPack;
 import com.giphy.sdk.core.network.api.CompletionHandler;
 import com.giphy.sdk.core.network.api.GPHApiClient;
 import com.giphy.sdk.core.network.response.ListMediaResponse;
 import com.giphy.sdk.core.network.response.ListStickerPacksResponse;
-import com.google.gson.Gson;
 
 import junit.framework.Assert;
 
@@ -192,39 +189,4 @@ public class StickerPacksTest {
         lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
     }
 
-    /**
-     * Test if parcelable is implemented correctly for the models
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testParcelable() throws Exception {
-        final CountDownLatch lock = new CountDownLatch(1);
-
-        imp.stickerPacks(new CompletionHandler<ListStickerPacksResponse>() {
-            @Override
-            public void onComplete(ListStickerPacksResponse result, Throwable e) {
-
-                Assert.assertNull(e);
-                Assert.assertNotNull(result);
-                Assert.assertTrue(!result.getData().isEmpty());
-
-                Gson gson = new Gson();
-                for (StickerPack stickerPack : result.getData()) {
-                    Parcel parcel = Parcel.obtain();
-                    stickerPack.writeToParcel(parcel, 0);
-                    parcel.setDataPosition(0);
-                    StickerPack parcelStickerPack = StickerPack.CREATOR.createFromParcel(parcel);
-
-                    // Compare the initial object with the one obtained from parcel
-                    String expected = gson.toJson(parcelStickerPack);
-                    String actual = gson.toJson(stickerPack);
-                    Assert.assertEquals(expected, actual);
-                }
-
-                lock.countDown();
-            }
-        });
-        lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
-    }
 }
