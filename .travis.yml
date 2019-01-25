@@ -35,7 +35,6 @@ cache:
 before_install:
   - bash .travis-android-license-bugfix.sh
   - echo y | android update sdk --no-ui --all
-  - yes | sdkmanager --licenses
 
 before_script:
   - android list targets
