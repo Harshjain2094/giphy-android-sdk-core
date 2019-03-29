@@ -23,9 +23,6 @@ The **Giphy Core SDK** is a wrapper around [Giphy API](https://github.com/Giphy/
 * [Random Gifs/Stickers](#random-endpoint)
 * [GIF by ID](#get-gif-by-id-endpoint)
 * [GIFs by IDs](#get-gifs-by-ids-endpoint)
-* [Categories for Gifs](#categories-endpoint)
-* [Subcategories for Gifs](#subcategories-for-gifs)
-* [Subcategory Content Endpoint](#subcategory-content-endpoint)
 * [Query Suggestions](#translate-endpoint)
 
 
@@ -275,97 +272,6 @@ imp.gifsByIds(gifIds, new CompletionHandler<ListMediaResponse>() {
 });
 ```
 
-### Categories Endpoint
-Fetch Giphy categories
-
-```java
-/// Categories
-client.categoriesForGifs(null, null, null, new CompletionHandler<ListCategoryResponse>() {
-    @Override
-    public void onComplete(ListCategoryResponse result, Throwable e) {
-        if (result == null) {
-            // Do what you want to do with the error
-        } else {
-            if (result.getData() != null) {
-                for (Category category : result.getData()) {
-                    Log.v("giphy", category.getName());
-                }
-            } else {
-                Log.e("giphy error", "No results found");
-            }
-        }
-    }
-});
-```
-
-### Subcategories Endpoint
-Get Subcategories for GIFs given a category. You will need this subcategory object to pull GIFs for this category.
-
-```java
-/// Categories
-client.subCategoriesForGifs("actions", null, null, null, new CompletionHandler<ListCategoryResponse>() {
-    @Override
-    public void onComplete(ListCategoryResponse result, Throwable e) {
-        if (result == null) {
-            // Do what you want to do with the error
-        } else {
-            if (result.getData() != null) {
-                for (Category category : result.getData()) {
-                    Log.v("giphy", category.getName());
-                }
-            } else {
-                Log.e("giphy error", "No results found");
-            }
-        }
-    }
-});
-```
-
-### Subcategory Content Endpoint
-Fetch GIFs with a specific category & subcategory(tags)
-
-```java
-/// Gifs by Category
-client.gifsByCategory("animals", "cats", null, null, new CompletionHandler<ListMediaResponse>() {
-    @Override
-    public void onComplete(ListMediaResponse result, Throwable e) {
-        if (result == null) {
-            // Do what you want to do with the error
-        } else {
-            if (result.getData() != null) {
-                for (Media gif : result.getData()) {
-                    Log.v("giphy", gif.getId());
-                }
-            } else {
-                Log.e("giphy error", "No results found");
-            }
-        }
-    }
-});
-```
-
-### Term suggestions Endpoint
-Get term suggestions given a search term, or a substring.
-
-```java
-/// Term suggestions
-client.termSuggestions("come", new CompletionHandler<ListTermSuggestionResponse>() {
-    @Override
-    public void onComplete(ListTermSuggestionResponse result, Throwable e) {
-        if (result == null) {
-            // Do what you want to do with the error
-        } else {
-            if (result.getData() != null) {
-                for (TermSuggestion term : result.getData()) {
-                    Log.v("giphy", term.getTerm());
-                }
-            } else {
-                Log.e("giphy error", "No results found");
-            }
-        }
-    }
-});
-```
 
 # CONTRIBUTING
 

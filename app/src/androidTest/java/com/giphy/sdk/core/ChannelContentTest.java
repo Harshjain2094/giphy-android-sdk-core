@@ -9,14 +9,11 @@
 
 package com.giphy.sdk.core;
 
-import android.os.Parcel;
-
 import com.giphy.sdk.core.models.Media;
 import com.giphy.sdk.core.models.enums.MediaType;
 import com.giphy.sdk.core.network.api.CompletionHandler;
 import com.giphy.sdk.core.network.api.GPHApiClient;
 import com.giphy.sdk.core.network.response.ListMediaResponse;
-import com.google.gson.Gson;
 
 import junit.framework.Assert;
 
@@ -240,38 +237,6 @@ public class ChannelContentTest {
         lock.await(20, TimeUnit.MILLISECONDS);
         task.cancel(true);
 
-        lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
-    }
-
-    /**
-     * Test if parcelable is implemeted correctly for the models
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testParcelable() throws Exception {
-        final CountDownLatch lock = new CountDownLatch(1);
-
-        imp.channelContent("1066", MediaType.gif, 7, null, new CompletionHandler<ListMediaResponse>() {
-            @Override
-            public void onComplete(ListMediaResponse result, Throwable e) {
-                Assert.assertNull(e);
-                Assert.assertNotNull(result);
-                Assert.assertTrue(result.getData().size() == 7);
-
-                Gson gson = new Gson();
-                for (Media media : result.getData()) {
-                    Parcel parcel = Parcel.obtain();
-                    media.writeToParcel(parcel, 0);
-                    parcel.setDataPosition(0);
-                    Media parcelMedia = Media.CREATOR.createFromParcel(parcel);
-                    // Compare the initial object with the one obtained from parcel
-                    Assert.assertEquals(gson.toJson(parcelMedia), gson.toJson(media));
-                }
-
-                lock.countDown();
-            }
-        });
         lock.await(Utils.SMALL_DELAY, TimeUnit.MILLISECONDS);
     }
 
