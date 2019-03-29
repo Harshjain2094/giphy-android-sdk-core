@@ -83,6 +83,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun categoriesForGifs(limit: Int?, offset: Int?,
                           sort: String?,
                           completionHandler: CompletionHandler<ListCategoryResponse>): Future<*>
@@ -96,6 +97,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun subCategoriesForGifs(categoryEncodedName: String,
                              limit: Int?, offset: Int?,
                              sort: String?,
@@ -112,6 +114,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun gifsByCategory(categoryEncodedName: String,
                        subCategoryEncodedName: String,
                        limit: Int?, offset: Int?,
@@ -141,6 +144,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun termSuggestions(term: String,
                         completionHandler: CompletionHandler<ListTermSuggestionResponse>): Future<*>
 
@@ -150,6 +154,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun stickerPacks(completionHandler: CompletionHandler<ListStickerPacksResponse>): Future<*>
 
     /**
@@ -158,6 +163,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun stickerPackChildren(packId: String,
                             completionHandler: CompletionHandler<ListStickerPacksResponse>): Future<*>
 
@@ -167,6 +173,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun stickerPackById(packId: String,
                         completionHandler: CompletionHandler<StickerPackResponse>): Future<*>
 
@@ -176,6 +183,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun stickersByPackId(packId: String,
                          limit: Int?, offset: Int?,
                          completionHandler: CompletionHandler<ListMediaResponse>): Future<*>
@@ -186,6 +194,7 @@ interface GPHApi {
      * @param completionHandler
      * @return
      */
+    @Deprecated("This endpoint is no longer supported")
     fun channelContent(channelId: String, mediaType: MediaType?,
                        limit: Int?, offset: Int?,
                        completionHandler: CompletionHandler<ListMediaResponse>): Future<*>

@@ -4,8 +4,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
-def sdkVersionCode = 200
-def sdkVersionName = "2.0.0"
+def sdkVersionCode = 4
+def sdkVersionName = "1.0.3"
 
 android {
     compileSdkVersion 28

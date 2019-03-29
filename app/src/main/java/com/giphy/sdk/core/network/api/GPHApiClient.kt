@@ -114,6 +114,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 RandomGifResponse::class.java, params, null).executeAsyncTask(completionHandlerWrapper)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun categoriesForGifs(limit: Int?, offset: Int?,
                                    sort: String?,
                                    completionHandler: CompletionHandler<ListCategoryResponse>): Future<*> {
@@ -133,6 +134,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 .executeAsyncTask(completionHandler)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun subCategoriesForGifs(categoryEncodedName: String,
                                       limit: Int?, offset: Int?,
                                       sort: String?,
@@ -169,6 +171,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 .executeAsyncTask(completionHandlerWrapper)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun gifsByCategory(categoryEncodedName: String,
                                 subCategoryEncodedName: String,
                                 limit: Int?, offset: Int?,
@@ -215,6 +218,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 .executeAsyncTask(completionHandler)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun termSuggestions(term: String,
                                  completionHandler: CompletionHandler<ListTermSuggestionResponse>): Future<*> {
         val params = HashMap<String, String>()
@@ -225,6 +229,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 ListTermSuggestionResponse::class.java, params, null).executeAsyncTask(completionHandler)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun stickerPacks(completionHandler: CompletionHandler<ListStickerPacksResponse>): Future<*> {
         val params = HashMap<String, String>()
         params[API_KEY] = apiKey
@@ -234,7 +239,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 ListStickerPacksResponse::class.java, params, null).executeAsyncTask(completionHandler)
     }
 
-
+    @Deprecated("This endpoint is no longer supported")
     override fun stickerPackChildren(packId: String,
                                      completionHandler: CompletionHandler<ListStickerPacksResponse>): Future<*> {
         val params = HashMap<String, String>()
@@ -245,6 +250,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 ListStickerPacksResponse::class.java, params, null).executeAsyncTask(completionHandler)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun stickerPackById(packId: String,
                                  completionHandler: CompletionHandler<StickerPackResponse>): Future<*> {
         val params = HashMap<String, String>()
@@ -255,6 +261,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 StickerPackResponse::class.java, params, null).executeAsyncTask(completionHandler)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun stickersByPackId(packId: String,
                                   limit: Int?, offset: Int?,
                                   completionHandler: CompletionHandler<ListMediaResponse>): Future<*> {
@@ -272,6 +279,7 @@ class GPHApiClient @JvmOverloads constructor(val apiKey: String,
                 ListMediaResponse::class.java, params, null).executeAsyncTask(completionHandler)
     }
 
+    @Deprecated("This endpoint is no longer supported")
     override fun channelContent(channelId: String, mediaType: MediaType?,
                                 limit: Int?, offset: Int?,
                                 completionHandler: CompletionHandler<ListMediaResponse>): Future<*> {

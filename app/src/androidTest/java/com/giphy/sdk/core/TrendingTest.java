@@ -253,7 +253,6 @@ public class TrendingTest {
     @Test
     public void testBooleanFields() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        final GPHApi imp = new GPHApiClient("4OMJYpPoYwVpe");
         imp.trending(MediaType.gif, 7, null, null, new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
@@ -282,7 +281,6 @@ public class TrendingTest {
     @Test
     public void testRenditionsAndMediaId() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        final GPHApi imp = new GPHApiClient("4OMJYpPoYwVpe");
         imp.trending(MediaType.gif, null, null, null, new CompletionHandler<ListMediaResponse>() {
             @Override
             public void onComplete(ListMediaResponse result, Throwable e) {
