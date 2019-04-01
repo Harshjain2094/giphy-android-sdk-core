@@ -64,8 +64,8 @@ bintray {
         repo = 'giphy-sdk'
         name = 'core'
         userOrg = 'giphy'
-        licenses = ['MPLV2.0']
-        vcsUrl = 'https://github.com/bintray/gradle-bintray-plugin.git'
+        licenses = ['MPL-2.0']
+        vcsUrl = 'https://github.com/Giphy/giphy-android-sdk-core'
         version {
             name = sdkVersionName
             desc = 'Giphy Core SDK'
