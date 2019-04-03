@@ -32,7 +32,7 @@ The **Giphy Core SDK** is a wrapper around [Giphy API](https://github.com/Giphy/
 
 Add the following dependency in the module ```build.gradle``` file:
 ```
-compile('com.giphy.sdk:core:1.0.3@aar') {
+compile('com.giphy.sdk:core:1.0.4@aar') {
     transitive=true
 }
 ```
